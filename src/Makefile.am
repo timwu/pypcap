@@ -1,18 +1,10 @@
-# $Id: Makefile 102 2010-07-17 19:07:07Z kosma@kosma.pl $
-
-PYTHON	= python
-
-#CONFIG_ARGS = --with-pcap=$(HOME)/build/libpcap-0.8.3
-
-# PYTHON = C:\\Python23\\python.exe
-#CONFIG_ARGS = --with-pcap=c:\\Users\\tim\\Downloads\\wpdpack
+EXTRA_DIST = setup.py pcap.pyx pcap_ex.c pcap_ex.h
 
 PKGDIR	= pypcap-`egrep version setup.py | cut -f2 -d"'"`
 URL	= `egrep url setup.py | cut -f2 -d"'"`
 
-all: pcap.pyx
-	$(PYTHON) setup.py config $(CONFIG_ARGS)
-	$(PYTHON) setup.py build
+all: 
+	$(PYTHON) setup.py build_ext @PCAP_BUILD_EXT_FLAGS@
 
 install:
 	$(PYTHON) setup.py install
